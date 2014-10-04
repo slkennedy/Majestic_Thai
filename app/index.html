@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
-    <title>Majestic_Thai</title>
+    <title>Majestic Thai Restaurant</title>
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
     <!-- build:css styles/vendor.css -->
@@ -32,8 +32,8 @@
         
         <footer class="footer-wrapper">
             <p>1-864-333-3333</p>
-            <h3>Majestic Thai</h3>
-            <p>411 University Ridge, Greenville, SC 29601</p>
+            <h5>Majestic Thai</h5>
+            <p>411 University Ridge, <br>Greenville, SC 29601</p>
         </footer>
     
     </div>
@@ -43,11 +43,25 @@
     <script src="../bower_components/jquery/dist/jquery.js"></script>
     <script src="../bower_components/underscore/underscore.js"></script>
     <script src="../bower_components/backbone/backbone.js"></script>
+    <script src="../bower_components/firebase/firebase.js"></script>
+    <script src="../bower_components/backfire/backbone-firebase.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
-        <!-- build:js scripts/main.js -->
-        <script src="scripts/main.js"></script>
-        <!-- endbuild -->
+    <script src="https://cdn.firebase.com/js/client/1.0.24/firebase.js"></script>
+
+    <!-- templates -->
+    <script type="text/template" id="templates-menu-item">
+        <div class="item-image"><%= image %></div>
+        <div class="item-info">
+            <h3><%= name %></h3>
+            <p><%= price %></p>
+            <p><%= description %></p>
+        </div>
+    </script>
+
+    <!-- build:js scripts/main.js -->
+    <script src="scripts/main.js"></script>
+    <!-- endbuild -->
 </body>
 </html>

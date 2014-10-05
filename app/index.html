@@ -27,8 +27,15 @@
         <header class="header-container">
             <h1>Majestic Thai</h1>
         </header>
-    
-        <section class="content-wrapper"></section>
+        <section class = "menu-wrapper">
+            <ul class= "menu-filters">
+                <li class ='apps'>Appetizers</li>
+                <li class = 'entrees' >Entrees</li>
+                <li class = 'order-details'>Order Details</li>
+                <li class = 'total-cost'>Total Cost:</li>
+
+        </section>
+        <div class= 'content-background'><section class="content-wrapper"></section></div>
         
         <footer class="footer-wrapper">
             <p>1-864-333-3333</p>
@@ -52,13 +59,18 @@
 
     <!-- templates -->
     <script type="text/template" id="templates-menu-item">
-        <div class="item-image"><%= image %></div>
+        <div class="item-image"><img src="<%= image %>"/></div>
         <div class="item-info">
             <h3><%= name %></h3>
-            <p><%= price %></p>
-            <p><%= description %></p>
+            <p class="price"><%= price %></p>
+            <p class="description"><%= description %></p>
         </div>
+        <button class="order">Order</button>
     </script>
+
+    <!-- <script type="text/javascript" id="templates-total-price">
+    <li class = "cost">Total Cost:</li>
+    </script> -->
 
     <!-- build:js scripts/main.js -->
     <script src="scripts/main.js"></script>

@@ -7,6 +7,8 @@
 body {
   font-size: 100%;
   font-family: $verdana;
+  // background-image: url('http://cache2.asset-cache.net/gc/148936417-detail-of-carved-wooden-door-with-floral-gettyimages.jpg?v=1&c=IWSAsset&k=2&d=Qe3TY8UMcNEyEifK50lD8koW33BjNK4eUFkr2lfUuTk%3D');
+  // background-repeat: repeat;
 }
 
 .mega-wrapper {
@@ -27,28 +29,101 @@ header {
     color:white;
     font-size: 3.5em;
     padding-top: 60px;
-    background-color: HSLA(77, 59%, 31%, .3);
+    background-color: HSLA(77, 59%, 31%, .25);
     margin: 0;
     height: 100%;
   }
 }
 
-section {
+.menu-wrapper {
+  position: relative;
+  background-color: HSLA(77, 59%, 31%, 1);
+  width: 90%;
+  margin: 0 auto;
+  overflow: auto;
+  padding: 25px;
+
+  .menu-filters {
+    display: inline;
+    list-style: none;
+
+    li {
+      display: inline-block;
+      font-size: 1.25em;
+      color: white;
+      margin-right: 50px;
+    }
+
+    a {
+      text-decoration: underline;
+      color: white;
+    }
+  }
+}
+.content-background {
+  background-color:white;
+  width: 90%;
+  position: relative;
+  margin: 0 auto;
+}
+
+.content-wrapper {
   position: relative;
   height: 500px;
   background-color: HSLA(77, 59%, 31%, .5);
-  width: 90%;
-  margin: 0 auto;
+  overflow: auto;
+  padding: 25px;
 
   .menu-list {
     margin: 0;
     padding: 0;
-    height: 498px;
-    overflow: hidden;
+    list-style: none;
   }
 
   .menu-item {
-    outline: 2px blue solid;
+    margin-bottom: 40px;
+
+    .item-image {
+      display: inline;
+
+      img {
+        max-height: 250px;
+        max-width: 250px;
+        object-fit: cover;
+        border-radius: 5px;
+      }
+    }
+    
+    .item-info {
+      display: inline;
+      position: absolute;
+      margin: 10px;
+
+      h3 {
+        display: inline-block;
+        margin: 0;
+      }
+
+      .price {
+        display: inline-block;
+        margin: 0;
+      }
+
+      .description {
+        display: block;
+        margin: 0;
+      }
+    }  
+
+    button {
+      position: absolute;
+      margin-top: 85px;
+      margin-left: 10px;
+      background-color: HSLA(77, 59%, 31%, 1);
+      color: white;
+      width: 100px;
+      border-radius: 5px;
+    }
   }
 }
 
@@ -72,17 +147,6 @@ footer{
     font-size: .75em;
   }
 
-}
-
-@media (min-width: 740px) {
-  .footer {
-    h5 {
-      font-size: .75em;
-    }
-    p{
-      font-size: .5em;
-    }
-  }
 }
 
 

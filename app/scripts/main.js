@@ -23,7 +23,9 @@
 	});
 
 	App.Models.SelectedItemModel = Backbone.Model.extend ({
-
+		defaults:{
+			total: 0
+		}
 	});
 
 /////////////////////////////COLLECTIONS/////////
@@ -47,23 +49,22 @@
 		tagName: "ul",
 		className: "menu-list",
 
-		initialize: function (){
-			this.listenTo(this.collection, "sync", this.render)
+		initialize: function (options){
+			options = options || {};
+			this.order = options.order;
+			console.log(this.order);
+			this.listenTo(this.collection, "sync", this.render);
 		},
 
 		render: function(){
 			$('.content-wrapper').append(this.el);
-			// var that = this;
-			// _.each(this.collection, function(item){
-			// 	console.log(item);
-			// 	that.renderChild(item);
-			// });
 			this.collection.each(_.bind(this.renderChild, this));
 
 		},
 		renderChild: function(item){
 			new App.Views.ItemsView({
 				model: item,
+				order: this.order
 			});
 		}
 	}); 
@@ -73,17 +74,14 @@
 		tagName: 'li',
 		className: 'menu-item',
 		template: _.template($("#templates-menu-item").text()),
-
+		
 		initialize: function (){
-
 			this.render();
 		},
 
 		render: function (){
 			$('.menu-list').append(this.el);
 			this.$el.html(this.template(this.model.attributes));
-
-			new App.Views.TotalCostView;
 		},
 	});
 
@@ -93,27 +91,25 @@
 		className: 'total',
 
 		events: {
-			'click button': 'addToOrder'
+			'click .order': 'addToOrder'
 		},
 
-		addToOrder: function (){
-			var addOrder = new App.Views.MenuView ({
-				collection: new App.Collections.SelectedItems,
-		
-			});
-
-			var itemPrice = (this.model.get('price'));
-			var totalPrice = totalPrice + itemPrice;
-			console.log(itemPrice);
-			// this.model.push(selectedCollection);
-		},
-
-		initalize: function (){
-			$('.total-cost').append(this.el);
-			this.render();
+		initialize: function (options){
+			options = options || {},
+			this.order = options.order;
+			console.log('youre the best');
+			// $('.total-cost').append(this.el);
+			// this.render();
 		},
 
 		render: function (){
+		},
+
+		
+		addToOrder: function (){
+			console.log('get it girl');
+			console.log(this.model.get('price'));
+			// this.model.push(selectedCollection);
 		}
 	});
 
@@ -150,13 +146,21 @@
 ////////////////////////////////////////////////
 	$(document).ready(function(){
 		var allItems = new App.Collections.AllItems();
+		var orderCollection = new App.Collections.SelectedItems();
+		var order = new App.Models.SelectedItemModel();
 
 		// new App.Views.ItemsView ({
 		// 	collection: allItems
 		// });
 
 		new App.Views.MenuView({
-			collection: allItems
+			collection: allItems,
+			order: order
+		});
+
+		new App.Views.TotalCostView ({
+			order: order,
+			collection: orderCollection
 		});
 
 		// new App.Views.FilteredView ({});			

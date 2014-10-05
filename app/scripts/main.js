@@ -24,7 +24,8 @@
 
 	App.Models.SelectedItemModel = Backbone.Model.extend ({
 		defaults:{
-			total: 0
+			total: 0,
+			name: ''
 		}
 	});
 
@@ -74,8 +75,14 @@
 		tagName: 'li',
 		className: 'menu-item',
 		template: _.template($("#templates-menu-item").text()),
-		
-		initialize: function (){
+
+		events: {
+			'click .order': 'changeOrder'
+		},
+
+		initialize: function (options){
+			options = options || {};
+			this.order = options.order;
 			this.render();
 		},
 
@@ -83,33 +90,28 @@
 			$('.menu-list').append(this.el);
 			this.$el.html(this.template(this.model.attributes));
 		},
+
+		changeOrder: function (){
+			this.order.set('total', this.model.get('price')+this.order.get('total'));
+			this.order.set('name', this.model.get('name'));
+		}
 	});
 
 //View for producing the total cost
 	App.Views.TotalCostView = Backbone.View.extend ({
-		tagName: 'li',
-		className: 'total',
-
-		events: {
-			'click .order': 'addToOrder'
-		},
-
+		
 		initialize: function (options){
 			options = options || {},
 			this.order = options.order;
-			console.log('youre the best');
-			// $('.total-cost').append(this.el);
-			// this.render();
+			this.listenTo(this.order, 'change', this.addToOrder);
 		},
 
 		render: function (){
 		},
-
 		
 		addToOrder: function (){
-			console.log('get it girl');
-			console.log(this.model.get('price'));
-			// this.model.push(selectedCollection);
+			$('.amount').html(' $ '+this.order.get('total'));
+			$('.menu-filters').prepend('<li class="item-name">'+this.order.get('name')+'</li>');
 		}
 	});
 

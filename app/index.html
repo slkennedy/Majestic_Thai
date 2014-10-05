@@ -29,11 +29,10 @@
         </header>
         <section class = "menu-wrapper">
             <ul class= "menu-filters">
-                <li class ='apps'>Appetizers</li>
-                <li class = 'entrees' >Entrees</li>
-                <li class = 'order-details'>Order Details</li>
-                <li class = 'total-cost'>Total Cost:</li>
-
+                <li class = 'total-cost'>Total Cost:
+                    <span class="amount"></span>
+                </li>
+            </ul>
         </section>
         <div class= 'content-background'><section class="content-wrapper"></section></div>
         
@@ -65,7 +64,7 @@
             <p class="price"><%= price %></p>
             <p class="description"><%= description %></p>
         </div>
-        <button class="order">Order</button>
+        <button class="order">Add to Order</button>
     </script>
 
     <!-- <script type="text/javascript" id="templates-total-price">

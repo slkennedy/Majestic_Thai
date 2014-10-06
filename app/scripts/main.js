@@ -13,6 +13,7 @@
 
 	//Model for all menu items
 	//connected to JSON file on Firebase
+	//objects have default attribute settings
 	App.Models.MenuItemModel = Backbone.Model.extend ({
 		defaults: {
 			name: "",
@@ -29,7 +30,8 @@
 	App.Models.SelectedItemModel = Backbone.Model.extend ({
 		defaults:{
 			total: 0,
-			name: []
+			name: [],
+			display: ''
 		}
 	});
 
@@ -62,7 +64,8 @@
 		className: "menu-list",
 
 		//on initalize - 
-		//data passed in will be set to itself or an empty object
+		//data (collection (AllItems) of models from the Firebase server) passed in will be set to itself...
+		//or an empty object
 		//order equals the model of selectedItems
 		//the object of this will be set to equal options 
 		//this view will listen for collection AllItems to sync & then run render function
@@ -88,7 +91,7 @@
 		renderChild: function(item){
 			new App.Views.ItemsView({
 				model: item,
-				order: this.order
+				order: this.order,
 			});
 		}
 	}); 
@@ -134,7 +137,10 @@
 		//name attribute for display later
 		changeOrder: function (){
 			this.order.set('total', this.model.get('price')+this.order.get('total'));
+			
 			this.order.get('name').push(this.model.get('name'));
+			this.order.set('display', this.model.get('name'));
+
 			console.log(this.order.get('name'));
 		}
 	});
@@ -166,7 +172,8 @@
 		//SelectedItemModel added to it
 		addToOrder: function (){
 			$('.amount').html(' $ '+this.order.get('total'));
-			$('.names').html(this.order.get('name'));
+			$('.names').empty();
+			$('.names').append(this.order.get('name'));
 		}
 	});
 
